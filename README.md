@@ -17,6 +17,8 @@ Then after this tutorial, you should feel very comfortable to use IBEX.
 6. Launch and access jupyter notebook, and custom web service
 7. Overview of the IBEX documentation
 8. Where to ask for help (such as installation and how to ask for extension on jobs)
+9. `tmux` for remote shell
+10. `imgcat` the shell integration tool to check images inside the iTerm commandline window.
 
 # We will not cover
 
