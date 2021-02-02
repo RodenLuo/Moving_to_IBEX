@@ -184,7 +184,7 @@ srun: job 13912529 has been allocated resources
 (base) [luod@gpu211-06 ~]$ nvidia-smi
 ```
 
-check [here](https://www.hpc.kaust.edu.sa/ibex/job) for IBEX job generator.
+check [here](https://www.hpc.kaust.edu.sa/ibex/job) for IBEX job generator, and [here](https://www.hpc.kaust.edu.sa/ibex/slurm_constraints) for more srun commands.
 
 ```shell
 (base) [luod@login510-22 test]$ ls
