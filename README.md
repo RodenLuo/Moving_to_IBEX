@@ -101,3 +101,129 @@ Quota information for IBEX filesystems:
 ```
 
 
+## 3. `module av`, `module load`, `module unload` to check and load certain packages
+
+```shell
+(base) [luod@login510-27 ~]$ module av pytorch
+
+------------------------------------- /sw/csgv/modulefiles/applications -------------------------------------
+pytorch/1.0.1-cuda10.0-cudnn7.6-py3.6 pytorch/1.2.0-cuda10.0-cudnn7.6-py3.7
+(base) [luod@login510-27 ~]$ module av tensorflow
+
+------------------------------------- /sw/csgv/modulefiles/applications -------------------------------------
+tensorflow/1.11.0                         tensorflow/1.14.0(default)
+tensorflow/1.11.0-cuda9.2-cudnn7.2-py3.6  tensorflow/1.14.0-cuda10.0-cudnn7.6-py3.7
+tensorflow/1.13.1                         tensorflow/2.0.0
+tensorflow/1.13.1-cuda10.0-cudnn7.6-py3.6 tensorflow/2.0.0-cuda10.0-cudnn7.6-py3.7
+(base) [luod@login510-27 ~]$ module av cuda
+
+-------------------------------------- /sw/csgv/modulefiles/compilers ---------------------------------------
+cuda/10.0.130          cuda/10.1.243(default) cuda/11.0.1            cuda/9.2.148.1
+cuda/10.1.105          cuda/10.2.89           cuda/9.0.176
+
+
+(base) [luod@login510-27 ~]$ module load pytorch/1.2.0-cuda10.0-cudnn7.6-py3.7
+(base) [luod@login510-27 ~]$ python
+Python 3.7.4 (default, Aug 13 2019, 20:35:49)
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import torch
+>>> print(torch.__version__)
+1.2.0
+
+
+(base) [luod@login510-27 ~]$ module unload pytorch/1.2.0-cuda10.0-cudnn7.6-py3.7
+Unloading module for Anaconda
+Anaconda 4.4.0 is now unloaded
+GNU 6.4.0 is now unloaded
+Unloading module for Machine Learning 2019.02
+Machine Learning 2019.02 is now unloaded
+(base) [luod@login510-27 ~]$ python
+Python 2.7.5 (default, Nov 16 2020, 22:23:17)
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-44)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import torch
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named torch
+```
+
+## 4. `ginfo`, `sinfo -p batch`, `snodes` to check available resources
+
+```shell
+(base) [luod@login510-27 ~]$ ginfo
+
+GPUS currently in use:
+GPU Models:          Total  Used  Free
+gtx1080ti               64    13    51
+p100                    12     5     7
+p6000                    4     0     4
+rtx2080ti               32    11    21
+v100                   274   241    33
+              Total:   386   270   116
+```
+
+## 5. `squeue`, `srun`, `sbatch`, `debug` vs `batch` to ask a computing node and to submit jobs, check `.out` and `.err`, and how to go to that node to check usage stats.
+
+```shell
+(base) [luod@login510-22 ~]$ myq
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          13912127      gpu4 plane_1X     luod  R      51:29      1 gpu211-10
+(base) [luod@login510-22 ~]$ which myq
+alias myq='squeue -u luod'
+	/opt/slurm/cluster/ibex/install/bin/squeue
+(base) [luod@login510-22 ~]$ which gpu-4h-bash
+alias gpu-4h-bash='srun -p batch --pty --time=4:00:00 --constraint=[gpu] --cpus-per-task=1 --gres=gpu:1 bash -l'
+	/opt/slurm/cluster/ibex/install/bin/srun
+(base) [luod@login510-22 ~]$ which v100-4h-bash
+alias v100-4h-bash='srun -p batch --pty --time=4:00:00 --constraint=[gpu] --cpus-per-task=1 --gres=gpu:v100:1 bash -l'
+	/opt/slurm/cluster/ibex/install/bin/srun
+(base) [luod@login510-22 ~]$ gpu-4h-bash
+srun: job 13912529 queued and waiting for resources
+srun: job 13912529 has been allocated resources
+(base) [luod@gpu211-06 ~]$ nvidia-smi
+```
+
+
+```shell
+(base) [luod@login510-22 ~]$ which showJob
+~/.myscript/showJob
+(base) [luod@login510-22 ~]$ cat ~/.myscript/showJob
+#!/bin/bash
+
+if [[ $# -eq 0 ]] ; then
+    echo 'usage: showJob <SLURM_JOB_ID>'
+    exit 0
+fi
+
+SLURM_JOB_ID=$1
+
+scontrol show jobid -dd $SLURM_JOB_ID
+
+
+(base) [luod@login510-22 plane_1X20_RS]$ which gotoGPUJob
+~/.myscript/gotoGPUJob
+(base) [luod@login510-22 plane_1X20_RS]$ cat ~/.myscript/gotoGPUJob
+#!/bin/bash
+
+if [[ $# -eq 0 ]] ; then
+    echo 'usage: gotoGPUJob <SLURM_JOB_ID> [NUMBER_OF_GPUS=1]'
+    exit 0
+fi
+
+SLURM_JOB_ID=$1
+
+if [ -z "$2" ]; then
+    NUMBER_OF_GPUS=1
+else
+    NUMBER_OF_GPUS=$2
+fi
+
+srun --jobid $SLURM_JOB_ID --gpus=$NUMBER_OF_GPUS --pty /bin/bash --login
+
+
+(base) [luod@login510-22 plane_1X20_RS]$ ls run_all.sh *.out *.err
+oxDNA.13912044.err  oxDNA.13912044.out  run_all.sh
+
+
+```
