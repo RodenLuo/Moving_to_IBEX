@@ -311,7 +311,23 @@ There is an #extension channel in the slack group.
 
 ## 9. `tmux` for remote shell
 
-Showed in #6. 
+```shell
+(base) [luod@login510-27 ~]$ tmux ls # show all sessions
+ox: 1 windows (created Wed Jan 20 21:07:34 2021) [140x41]
+oxdnaweb: 1 windows (created Thu Dec 31 15:04:54 2020) [127x48]
+(base) [luod@login510-27 ~]$ tmux new -s test # create a new session named "test"
+[detached]
+(base) [luod@login510-27 ~]$ tmux ls
+ox: 1 windows (created Wed Jan 20 21:07:34 2021) [140x41]
+oxdnaweb: 1 windows (created Thu Dec 31 15:04:54 2020) [127x48]
+test: 3 windows (created Tue Feb  2 12:04:36 2021) [80x24]
+(base) [luod@login510-27 ~]$ tmux a -t test # to attach
+[detached]
+```
+
+`control-b c` to create more windows in a session
+`control-b <0/1/2/...>` to switch to other windows in a session
+`control-b d` to detach from a session
 
 ## 10. `imgcat` the shell integration tool to check images inside the iTerm commandline window.
 
