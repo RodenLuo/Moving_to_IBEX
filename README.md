@@ -271,6 +271,9 @@ run_all.sh  test.13912810.err  test.13912810.out
 (base) [luod@login510-22 test]$ less test.13912810.err
 ```
 
+Check Email for `BEGIN`, `COMPLETED`, `FAILED`, `CANCELED`, notifications
+
+
 
 
 
