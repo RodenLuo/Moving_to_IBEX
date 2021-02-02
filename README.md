@@ -25,6 +25,10 @@ then after this tutorial, you should feel very comfortable to use IBEX.
 1. `cd`, `ls`, `vi` basic Linux command line
 2. Deep learning pipeline (there are tutorials in doc). We will only cover to `import torch/tensorflow` and see if it works. 
 
+## IBEX architecture 
+
+[![Image from Gyazo](https://i.gyazo.com/6c4e09c97b03f8ae4915e5514d5845f1.png)](https://gyazo.com/6c4e09c97b03f8ae4915e5514d5845f1)
+
 ## 1. `ssh` and `authorized_keys` for login and how to stay in the same login node if necessary
 
 
