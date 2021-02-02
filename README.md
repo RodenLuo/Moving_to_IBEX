@@ -10,7 +10,7 @@ then after this tutorial, you should feel very comfortable to use IBEX.
 # We will cover 
 
 1. `ssh` and `authorized_keys` for login and how to stay in the same login node if necessary
-2. `/ibex/scratch/<userID>`, `scp`, `rsync`, `bquota`, `quota -s` for data transfer and disk usage 
+2. `/ibex/scratch/<userID>`, `scp`, `rsync`, `wget`, `bquota`, `quota -s` for data transfer and disk usage 
 3. `module av`, `module load`, `module unload` to check and load certain packages
 4. `ginfo`, `sinfo -p batch`, `snodes` to check available resources
 5. `squeue`, `srun`, `sbatch`, `debug` vs `batch` to ask a computing node and to submit jobs, check `.out` and `.err`, and how to go to that node to check usage stats. 
@@ -69,7 +69,7 @@ Last login: Sun Jan 31 17:00:01 2021 from 10.240.0.57
 ```
 
 
-## 2. `/ibex/scratch/<userID>`, `scp`, `rsync`, `bquota`, `quota -s` for data transfer and disk usage 
+## 2. `/ibex/scratch/<userID>`, `scp`, `rsync`, `wget`, `bquota`, `quota -s` for data transfer and disk usage 
 
 ```shell
 # server
@@ -92,6 +92,8 @@ rsync -av --progress --delete /path/to/localdir/ USER@HOSTNAME:/path/to/destinat
 ```
 
 Check IBEX doc [here](https://www.hpc.kaust.edu.sa/ibex/transfering_data) for `rsync`.
+
+[How to get past the login page with Wget?](https://stackoverflow.com/questions/1324421/how-to-get-past-the-login-page-with-wget)
 
 ```shell
 (base) [luod@login510-27 ~]$ bquota # check scratch disk usage
