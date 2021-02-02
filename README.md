@@ -310,3 +310,15 @@ Google "kaust ibex" and find [Welcome to Ibex](https://www.hpc.kaust.edu.sa/ibex
 There is an #extension channel in the slack group.
 
 ## 9. `tmux` for remote shell
+
+Showed in #6. 
+
+## 10. `imgcat` the shell integration tool to check images inside the iTerm commandline window.
+
+```shell
+(base) [luod@login510-22 test]$ wget https://innovation.kaust.edu.sa/wp-content/uploads/2016/01/thought-leadership-blog-picchanged.jpg
+(base) [luod@login510-22 test]$ imgcat thought-leadership-blog-picchanged.jpg
+```
+
+[![Image from Gyazo](https://i.gyazo.com/56fe35f7f46d2bae753309a2de45441a.jpg)](https://gyazo.com/56fe35f7f46d2bae753309a2de45441a)
+
