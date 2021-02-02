@@ -296,3 +296,9 @@ oxdnaweb: 1 windows (created Thu Dec 31 15:04:54 2020) [110x44]
 Google "kaust ibex" and find [Welcome to Ibex](https://www.hpc.kaust.edu.sa/ibex), go to tab "Documentation » Ibex User Guide".
 
 ## 8. Where to ask for help (such as installation and how to ask for extension on jobs)
+
+[Chapter 6: Support](https://www.hpc.kaust.edu.sa/ibex/support)
+
+There is an #extension channel in the slack group.
+
+## 9. `tmux` for remote shell
