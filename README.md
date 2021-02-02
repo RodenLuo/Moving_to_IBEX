@@ -184,11 +184,43 @@ srun: job 13912529 has been allocated resources
 (base) [luod@gpu211-06 ~]$ nvidia-smi
 ```
 
+check [here](https://www.hpc.kaust.edu.sa/ibex/job) for IBEX job generator.
 
 ```shell
-(base) [luod@login510-22 ~]$ which showJob
+(base) [luod@login510-22 test]$ ls
+run_all.sh
+(base) [luod@login510-22 test]$ cat run_all.sh
+#!/bin/bash
+#SBATCH -N 1
+#SBATCH --partition=batch
+#SBATCH -J test
+#SBATCH -o test.%J.out
+#SBATCH -e test.%J.err
+#SBATCH --mail-user=deng.luo@kaust.edu.sa
+#SBATCH --mail-type=ALL
+#SBATCH --time=4:00:00
+#SBATCH --mem=128G
+#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=6
+#SBATCH --constraint=[gpu]
+
+#run the application:
+now=$(date +"%T")
+echo "Current time : $now"
+
+sleep 120
+
+now=$(date +"%T")
+echo "Current time : $now"
+
+(base) [luod@login510-22 test]$ sbatch run_all.sh
+Submitted batch job 13912810
+(base) [luod@login510-22 test]$ myq
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          13912810      gpu4     test     luod  R       0:01      1 gpu212-10
+(base) [luod@login510-22 test]$ which showJob
 ~/.myscript/showJob
-(base) [luod@login510-22 ~]$ cat ~/.myscript/showJob
+(base) [luod@login510-22 test]$ cat ~/.myscript/showJob
 #!/bin/bash
 
 if [[ $# -eq 0 ]] ; then
@@ -199,11 +231,15 @@ fi
 SLURM_JOB_ID=$1
 
 scontrol show jobid -dd $SLURM_JOB_ID
+(base) [luod@login510-22 test]$ showJob 13912810
 
+... 
+...
+...
 
-(base) [luod@login510-22 plane_1X20_RS]$ which gotoGPUJob
+(base) [luod@login510-22 test]$ which gotoGPUJob
 ~/.myscript/gotoGPUJob
-(base) [luod@login510-22 plane_1X20_RS]$ cat ~/.myscript/gotoGPUJob
+(base) [luod@login510-22 test]$ cat ~/.myscript/gotoGPUJob
 #!/bin/bash
 
 if [[ $# -eq 0 ]] ; then
@@ -220,10 +256,21 @@ else
 fi
 
 srun --jobid $SLURM_JOB_ID --gpus=$NUMBER_OF_GPUS --pty /bin/bash --login
-
-
-(base) [luod@login510-22 plane_1X20_RS]$ ls run_all.sh *.out *.err
-oxDNA.13912044.err  oxDNA.13912044.out  run_all.sh
-
-
+(base) [luod@login510-22 test]$ gotoGPUJob 13912810
+(base) [luod@gpu212-10 test]$ nvidia-smi
+...
+...
+...
+(base) [luod@gpu212-10 test]$ logout
+(base) [luod@login510-22 test]$ ls
+run_all.sh  test.13912810.err  test.13912810.out
+(base) [luod@login510-22 test]$ myq
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          13912810      gpu4     test     luod  R       1:01      1 gpu212-10
+(base) [luod@login510-22 test]$ less test.13912810.out
+(base) [luod@login510-22 test]$ less test.13912810.err
 ```
+
+
+
+
