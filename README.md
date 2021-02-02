@@ -190,7 +190,10 @@ check [here](https://www.hpc.kaust.edu.sa/ibex/job) for IBEX job generator, and 
 
 ```shell
 (base) [luod@login510-22 test]$ ls
-run_all.sh
+print_pytorch_version.py  run_all.sh
+(base) [luod@login510-22 test]$ cat print_pytorch_version.py
+import torch
+print(torch.__version__)
 (base) [luod@login510-22 test]$ cat run_all.sh
 #!/bin/bash
 #SBATCH -N 1
@@ -209,6 +212,8 @@ run_all.sh
 #run the application:
 
 module load pytorch/1.2.0-cuda10.0-cudnn7.6-py3.7
+
+python print_pytorch_version.py
 
 now=$(date +"%T")
 echo "Current time : $now"
