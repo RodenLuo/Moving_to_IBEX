@@ -67,3 +67,37 @@ Last login: Sun Jan 31 17:00:01 2021 from 10.240.0.57
 \--------------------------------------------------------------------/
 (base) [luod@login510-27 ~]$
 ```
+
+
+## 2. `/ibex/scratch/<userID>`, `scp`, `rsync`, `bquota`, `quota -s` for data transfer and disk usage 
+
+```shell
+# server
+(base) [luod@login510-27 ~]$ pwd
+/home/luod
+(base) [luod@login510-27 ~]$ which cds
+alias cds='cd /ibex/scratch/luod'
+	/usr/bin/cd
+(base) [luod@login510-27 ~]$ cds
+(base) [luod@login510-27 luod]$ pwd
+/ibex/scratch/luod
+```
+
+```shell
+# client
+scp output.* luod@glogin.ibex.kaust.edu.sa:/ibex/scratch/luod/oxDNA_tutorial/oxDNA_tutorial_input_files_sbatch/tetraBrick_4_vertices/987/add_7/
+
+# Make or update a remote location to be an exact copy of the source:
+rsync -av --progress --delete /path/to/localdir/ USER@HOSTNAME:/path/to/destination
+```
+
+Check IBEX doc [here](https://www.hpc.kaust.edu.sa/ibex/transfering_data) for `rsync`.
+
+```shell
+(base) [luod@login510-27 ~]$ bquota # check scratch disk usage
+Quota information for IBEX filesystems:
+  Scratch             (/ibex/scratch):     Used:      392.90 GB   Limit:     1536.00 GB
+(base) [luod@login510-27 ~]$ quota -s # check home dir usage
+```
+
+
