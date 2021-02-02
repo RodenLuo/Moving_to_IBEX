@@ -23,7 +23,7 @@ then after this tutorial, you should feel very comfortable to use IBEX.
 # We will not cover
 
 1. `cd`, `ls`, `vi` basic Linux command line
-2. Deep learning pipeline (there are tutorials in doc). We will only cover to `import torch/tensorflow` and see if it works. 
+2. Deep learning pipeline (but will give official tutorial links). We will only cover to `import torch/tensorflow` and see if it works. 
 
 ## IBEX architecture 
 
@@ -274,6 +274,23 @@ run_all.sh  test.13912810.err  test.13912810.out
 Check Email for `BEGIN`, `COMPLETED`, `FAILED`, `CANCELED`, notifications
 
 
+## 6. Launch and access jupyter notebook, and custom web service
+
+[Launching Jupyter notebooks](https://www.hpc.kaust.edu.sa/content/launching-jupyter-notebooks)
+
+[Best Practices for Deep Learning](https://www.hpc.kaust.edu.sa/content/best-practices-deep-learning)
+
+```shell
+(base) [luod@login510-27 add_staple_2]$ tmux ls
+ox: 1 windows (created Wed Jan 20 21:07:34 2021) [140x41]
+oxdnaweb: 1 windows (created Thu Dec 31 15:04:54 2020) [110x44]
+(base) [luod@login510-27 add_staple_2]$ tmux a -t oxdnaweb
+[detached]
+```
 
 
+## 7. Overview of the IBEX documentation
 
+Google "kaust ibex" and find [Welcome to Ibex](https://www.hpc.kaust.edu.sa/ibex), go to tab "Documentation » Ibex User Guide".
+
+## 8. Where to ask for help (such as installation and how to ask for extension on jobs)
