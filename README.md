@@ -207,6 +207,9 @@ run_all.sh
 #SBATCH --constraint=[gpu]
 
 #run the application:
+
+module load pytorch/1.2.0-cuda10.0-cudnn7.6-py3.7
+
 now=$(date +"%T")
 echo "Current time : $now"
 
