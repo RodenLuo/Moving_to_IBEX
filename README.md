@@ -1,5 +1,7 @@
 # Moving_to_IBEX
 
+One hour recording on YouTube: [https://youtu.be/9eddLZZvr0E](https://youtu.be/9eddLZZvr0E).
+
 This is intended to be a less than 30 min tutorial on how to move work environment 
 from a lab node (standalone Linux) to IBEX (cluster using `slurm`to manage jobs). 
 
